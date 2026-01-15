@@ -46,7 +46,8 @@ The application will:
 ## Configuration
 
 Default chunk settings in `src/index.ts`:
-- `chunkSize`: 1000 characters
-- `chunkOverlap`: 200 characters
+- `encodingName`: 'cl100k_base' (used by GPT-3.5/GPT-4 and most modern embedding models)
+- `chunkSize`: 500 tokens (safe for most embedding models with 512-1024 token limits)
+- `chunkOverlap`: 50 tokens (10% overlap for context preservation)
 
-Uses `RecursiveCharacterTextSplitter` for intelligent text splitting.
+Uses `TokenTextSplitter` for token-based chunking, ensuring accurate token counting for embedding models.

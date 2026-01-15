@@ -1,4 +1,4 @@
-import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
+import { TokenTextSplitter } from '@langchain/textsplitters';
 import { readdirSync, readFileSync, existsSync, statSync, writeFileSync, mkdirSync, rmSync } from 'fs';
 import { join, extname } from 'path';
 
@@ -37,9 +37,10 @@ async function getAllCodeFiles(dir: string): Promise<string[]> {
 const removeStyleTags = (content: string): string => content.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
 
 async function chunkCodeFiles(directory: string): Promise<ChunkResult[]> {
-  const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 1000,
-    chunkOverlap: 200,
+  const splitter = new TokenTextSplitter({
+    encodingName: 'cl100k_base',
+    chunkSize: 500,
+    chunkOverlap: 100,
   });
   
   const codeFiles = await getAllCodeFiles(directory);
