@@ -40,7 +40,7 @@ async function chunkCodeFiles(directory: string): Promise<ChunkResult[]> {
   const splitter = new TokenTextSplitter({
     encodingName: 'cl100k_base',
     chunkSize: 500,
-    chunkOverlap: 100,
+    chunkOverlap: 50,
   });
   
   const codeFiles = await getAllCodeFiles(directory);
